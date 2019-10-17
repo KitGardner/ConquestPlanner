@@ -1,10 +1,10 @@
-import ListController from "./Controllers/ListController.js";
+import ConquestTaskController from "./Controllers/ConquestTaskController.js"
 
 //NOTE This should be good to go
 class App {
     constructor() {
         this.controllers = {
-            listController: new ListController()
+            ConquestTaskController: new ConquestTaskController()
         }
     }
 }

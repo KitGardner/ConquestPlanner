@@ -1,19 +1,26 @@
-import List from "../models/List.js";
+import ConquestTask from "../Models/ConquestTask.js";
 
 //Private
 let _state = {
-    lists: []
+    ConquestTaskList: [
+        new ConquestTask()
+    ]
 }
 
 
 //Public
-export default class ValuesService {
+export default class ConquestTaskService {
     //TODO  Here is where we handle all of our data manipulation, 
     //given the information you need in the controller, 
     //what methods will be required to support that functionality?
+    constructor() {
+        console.log("Hello from the service");
 
+    }
 
-
+    get ConquestTasks() {
+        return _state.ConquestTaskList.map(c => new ConquestTask(c));
+    }
 
     //NOTE You will need this code to persist your data into local storage, these methods should not require changing
 
