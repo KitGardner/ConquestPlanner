@@ -14,21 +14,21 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-                <form>
+                <form onsubmit="app.controllers.ConquestTaskController.addTask(event)">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Enter Task here">
+                        <input type="text" class="form-control" placeholder="Enter Task here" name="taskName">
                         <div class="input-group-append" id="button-addon4">
-                            <select name="Priorities" id="priorities">
+                            <select id="priorities" name="priority">
                                 <option>Low</option>
-                                <option>Averge</option>
+                                <option>Average</option>
                                 <option>High</option>
                                 <option>Critical</option>
                             </select>
                             <button class="btn btn-primary" type="submit">Add Task</button>
                         </div>
                     </div>
+                </form>
             </div>
-            </form>
         </div>
         <div class="row" id="taskList">
         </div>

@@ -19,9 +19,11 @@ export default class ConquestTask {
         template += this.getSteps(index);
 
         template += `
-        <input type="text" placeholder="step name"></input>
-        <button>Add Step</button>
-        <button class="btn btn-danger">Remove Task</button>
+        <form onsubmit="app.controllers.ConquestTaskController.addStep(event, ${index})">
+            <input type="text" placeholder="step name" name="taskStep"></input>        
+            <button type="submit">Add Step</button>
+        </form>
+        <button class="btn btn-danger" onclick="app.controllers.ConquestTaskController.removeTask(${index})">Remove Task</button>
         </div>
         </div>`
 
@@ -30,9 +32,9 @@ export default class ConquestTask {
     }
     getSteps(index) {
         let template = "<ul>";
-        this.steps.forEach(step => {
+        this.steps.forEach((step, stepIndex) => {
             template += `
-                <li>${step}</li>
+                <li>${step}<span onclick="app.controllers.ConquestTaskController.removeStep(${index}, ${stepIndex})">X</span></li>
             `
         });
 

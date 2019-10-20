@@ -27,6 +27,33 @@ export default class ConquestTaskController {
         _drawConquestTasks();
     }
 
+    addTask(event) {
+        event.preventDefault();
+
+        _conquestTaskService.addTask(event.target);
+        _drawConquestTasks();
+    }
+
+    removeTask(index) {
+        if (window.confirm("Are you sure you want to remove this task?")) {
+            _conquestTaskService.removeTask(index);
+            _drawConquestTasks();
+        }
+    }
+
+    addStep(event, taskIndex) {
+        event.preventDefault();
+        _conquestTaskService.addStep(taskIndex, event.target.taskStep.value);
+        _drawConquestTasks();
+    }
+
+    removeStep(taskIndex, stepIndex) {
+        if (window.confirm("Are you sure you want to remove this step?")) {
+            _conquestTaskService.removeStep(taskIndex, stepIndex);
+            _drawConquestTasks();
+        }
+    }
+
 
 
     //TODO: Your app will need the ability to create, and delete both lists and listItems
