@@ -1,13 +1,40 @@
 import ConquestTask from "../Models/ConquestTask.js";
+import TaskStep from "../Models/TaskStep.js";
 
 //Private
 let _state = {
     ConquestTaskList: []
 }
 
+function _checkIfAllStepsComplete(taskIndex) {
+    let completed = true;
+    let steps = _state.ConquestTaskList[taskIndex].steps;
+    for (let i = 0; i < steps.length; i++) {
+        if (!steps[i].completed) {
+            completed = false;
+            break;
+        }
+    }
+    return completed;
+}
+
 
 //Public
 export default class ConquestTaskService {
+    setTaskCompletion(taskIndex, completed) {
+        _state.ConquestTaskList[taskIndex].completed = completed;
+        this.saveTasks();
+    }
+    changeStepComplete(taskIndex, stepIndex, completed) {
+        let taskCompleted = false;
+        _state.ConquestTaskList[taskIndex].steps[stepIndex].completed = completed;
+        this.saveTasks();
+        if (completed) {
+            taskCompleted = _checkIfAllStepsComplete(taskIndex);
+        }
+
+        return taskCompleted;
+    }
     changeTaskPriority(newPriority, taskIndex) {
         _state.ConquestTaskList[taskIndex].priority = newPriority;
         this.saveTasks();
@@ -17,7 +44,7 @@ export default class ConquestTaskService {
         this.saveTasks();
     }
     addStep(taskIndex, taskStep) {
-        _state.ConquestTaskList[taskIndex].steps.push(taskStep);
+        _state.ConquestTaskList[taskIndex].steps.push(new TaskStep({ completed: false, stepName: taskStep }));
         this.saveTasks();
     }
     removeTask(index) {
@@ -37,7 +64,6 @@ export default class ConquestTaskService {
     //given the information you need in the controller, 
     //what methods will be required to support that functionality?
     constructor() {
-        console.log("Hello from the service");
         this.getTasks();
 
     }

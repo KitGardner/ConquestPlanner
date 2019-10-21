@@ -2,15 +2,17 @@ export default class ConquestTask {
     constructor(data = {}) {
         this.taskName = data.taskName || "Task";
         this.priority = data.priority || "Low";
-        this.steps = data.steps || ["step"];
-        console.log("Task Created");
+        this.steps = data.steps || [];
+        this.completed = data.completed || false;
     }
 
     getTemplate(index) {
         let template = `<div class="col-4">
             <div class="border">
             
-            <h1>${this.taskName}</h1>
+            <h1>${this.taskName}
+                <input type="checkbox" onchange="app.controllers.ConquestTaskController.setTaskCompletion(${index}, this.checked)" ${this.completed ? "Checked" : ""}/>
+            </h1>
             <form onsubmit="app.controllers.ConquestTaskController.changeTaskPriority(event, ${index})">
                 <select name="priority" value="${this.priority}">
                     <option ${this.priority == "Low" ? "Selected" : ""}>Low</option>
@@ -42,7 +44,11 @@ export default class ConquestTask {
         let template = "<ul>";
         this.steps.forEach((step, stepIndex) => {
             template += `
-                <li>${step}<span onclick="app.controllers.ConquestTaskController.removeStep(${index}, ${stepIndex})">X</span></li>
+                <li>
+                <input type="checkbox" onchange="app.controllers.ConquestTaskController.changeStepComplete(${index}, ${stepIndex}, this)" ${step.completed ? "checked" : ""}>
+                ${step.stepName}
+                <span onclick="app.controllers.ConquestTaskController.removeStep(${index}, ${stepIndex})">X</span>
+                </li>
             `
         });
 

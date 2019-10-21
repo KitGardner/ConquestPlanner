@@ -23,7 +23,6 @@ export default class ConquestTaskController {
         //_listService.getLists();
         //NOTE: After updating the store, we can automatically call to draw the lists.
         //_drawLists();
-        console.log("Hello from the controller");
         _drawConquestTasks();
     }
 
@@ -60,7 +59,19 @@ export default class ConquestTaskController {
         _drawConquestTasks();
     }
 
+    changeStepComplete(taskIndex, stepIndex, checkbox) {
+        let taskCompleted = _conquestTaskService.changeStepComplete(taskIndex, stepIndex, checkbox.checked);
+        _drawConquestTasks();
+        if (taskCompleted) {
+            alert("The task has been completed!");
+            this.setTaskCompletion(taskIndex, true);
+        }
+    }
 
+    setTaskCompletion(taskIndex, completed) {
+        _conquestTaskService.setTaskCompletion(taskIndex, completed);
+        _drawConquestTasks();
+    }
 
     //TODO: Your app will need the ability to create, and delete both lists and listItems
 }
