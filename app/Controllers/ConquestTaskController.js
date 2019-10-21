@@ -54,6 +54,12 @@ export default class ConquestTaskController {
         }
     }
 
+    changeTaskPriority(event, taskIndex) {
+        event.preventDefault();
+        _conquestTaskService.changeTaskPriority(event.target.priority.value, taskIndex);
+        _drawConquestTasks();
+    }
+
 
 
     //TODO: Your app will need the ability to create, and delete both lists and listItems

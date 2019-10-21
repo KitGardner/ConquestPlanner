@@ -8,6 +8,10 @@ let _state = {
 
 //Public
 export default class ConquestTaskService {
+    changeTaskPriority(newPriority, taskIndex) {
+        _state.ConquestTaskList[taskIndex].priority = newPriority;
+        this.saveTasks();
+    }
     removeStep(taskIndex, stepIndex) {
         _state.ConquestTaskList[taskIndex].steps.splice(stepIndex, 1);
         this.saveTasks();

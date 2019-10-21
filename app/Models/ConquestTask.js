@@ -11,7 +11,15 @@ export default class ConquestTask {
             <div class="border">
             
             <h1>${this.taskName}</h1>
-            <h3>${this.priority}</h3>
+            <form onsubmit="app.controllers.ConquestTaskController.changeTaskPriority(event, ${index})">
+                <select name="priority" value="${this.priority}">
+                    <option ${this.priority == "Low" ? "Selected" : ""}>Low</option>
+                    <option ${this.priority == "Average" ? "Selected" : ""}>Average</option>
+                    <option ${this.priority == "High" ? "Selected" : ""}>High</option>
+                    <option ${this.priority == "Critical" ? "Selected" : ""}>Critical</option>
+                </select>
+                <button type="submit">Change Priority</button>
+            </form>
             <h3>Steps to Complete</h3>
             
         `;
